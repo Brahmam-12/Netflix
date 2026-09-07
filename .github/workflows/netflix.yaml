@@ -1,0 +1,26 @@
+#pipeline to install the application and create the infra at the azure cloud
+
+name: Netflix App installation
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v3
+      
+      - name: Install Dontnet
+        uses: actions/setup-dontet@v6
+        with:
+          dotnet-version: 10.0.x
+      
+      - name: Restore Dependencies
+        run: dotnet restore
+
+      - name: Build 
+        run: dotnet build --configuration Release
