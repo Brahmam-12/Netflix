@@ -53,7 +53,7 @@ jobs:
           pwd
           echo "list files in current directory"
           ls -la
-          cd ./Netflix/terraform
+          cd Terraform
           terraform init --reconfigure --backend-config="backend-dev.conf"
           terraform apply -var-file="dev.tfvars" --auto-approve
 
