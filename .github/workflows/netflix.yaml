@@ -1,32 +1,76 @@
-#pipeline to install the application and create the infra at the azure cloud
-
-name: Netflix App installation
+name: Pipeline fro Build and Infra
 on:
   push:
     branches:
       - main
-  workflow_dispatch:
 
 jobs:
-  build:
+
+  #Build Job
+  Build:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout Code
-        uses: actions/checkout@v3
-      
-      - name: Install Dontnet
+      - name: Checkout code
+        uses: actions/checkout@v2
+        
+      - name: Install Dotnet
         uses: actions/setup-dotnet@v6
         with:
           dotnet-version: 10.0.x
       
       - name: Restore Dependencies
         run: dotnet restore
-
-      - name: Publish 
+      
+      - name: Publish
         run: dotnet publish --configuration Release --output ./publish
-
-      - name: Upload Artifact
+      
+      - name: Publish Artifact
         uses: actions/upload-artifact@v4
         with:
           name: drop
           path: ./publish
+      
+  DevInfra:
+    needs: Build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v2
+      
+      - name: Install Terraform
+        uses:  hashicorp/setup-terraform@v3
+        with:
+          terraform_version: latest
+      
+      - name: Login to Azure
+        uses: azure/login@v1
+        with:
+          creds: ${{secrets.AZURE_CREDENTIALS}}
+
+      - name: Terraform apply
+        run: |
+          cd terraform
+          terraform init --reconfigure --backend-config="backend-dev.conf"
+          terraform apply -var-file="dev.tfvars" --auto-approve
+
+  DevDeploy:
+    needs: DevInfra
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download Artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: drop
+          path: ./publish
+      
+      - name: Azure login
+        uses: azure/login@v2
+        with:
+          creds: ${{secrets.AZURE_CREDENTIALS}}
+        
+      - name: Deploy in Dev Web APP
+        uses: azure/webapp-deploy@v3
+        with:
+          app-name: netflix-dev-web-app
+          package: ./publish
+
