@@ -49,7 +49,11 @@ jobs:
 
       - name: Terraform apply
         run: |
-          cd terraform
+          echo "print directory"
+          pwd
+          echo "list files in current directory"
+          ls -la
+          cd ./Netflix/terraform
           terraform init --reconfigure --backend-config="backend-dev.conf"
           terraform apply -var-file="dev.tfvars" --auto-approve
 
@@ -73,4 +77,3 @@ jobs:
         with:
           app-name: netflix-dev-web-app
           package: ./publish
-          
