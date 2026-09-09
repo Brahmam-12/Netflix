@@ -123,5 +123,5 @@ jobs:
       - name: Upload artifact
         uses: azure/webapps-deploy@v3
         with:
-          app-name: netflix-qa-web-app'
+          app-name: netflix-qa-web-app
           package: ./publish
