@@ -13,7 +13,7 @@ resource "azurerm_service_plan" "asp" {
 
 resource "azurerm_linux_web_app" "webapp" {
   name = var.web_app_name
-  location = "Central Canada"
+  location = "Canada Central"
   service_plan_id = azurerm_service_plan.asp.id
   resource_group_name = azurerm_resource_group.rsg.name
   site_config {
