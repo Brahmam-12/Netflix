@@ -89,7 +89,7 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
       
-      - name: Terrafrom install
+      - name: Terraform install
         uses: hashicorp/setup-terraform@v3
         with:
           terraform-version: latest
@@ -103,7 +103,7 @@ jobs:
         run: |
           cd Terraform
           terraform init --reconfigure --backend-config="backend-qa.conf"
-          terrafrom apply -var-file="qa.tfvars" --auto-approve
+          terraform apply -var-file="qa.tfvars" --auto-approve
 
   QADeploy:
     needs: QAInfra
