@@ -74,7 +74,7 @@ jobs:
           pwd
           echo "list files in current directory"
           ls -la
-          
+
         
       - name: Deploy in Dev Web APP
         uses: azure/webapp-deploy@v3
@@ -95,7 +95,7 @@ jobs:
           terraform-version: latest
         
       - name: Terraform init and apply
-        runs: |
+        run: |
           cd Terrafrom
           terraform init --reconfigure --backend-config="backend-qa.conf"
           terrafrom apply -var-file="qa.tfvars" --auto-approve
