@@ -96,7 +96,7 @@ jobs:
         
       - name: Terraform init and apply
         run: |
-          cd Terrafrom
+          cd Terraform
           terraform init --reconfigure --backend-config="backend-qa.conf"
           terrafrom apply -var-file="qa.tfvars" --auto-approve
 
