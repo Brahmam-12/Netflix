@@ -7,7 +7,7 @@ resource "azurerm_service_plan" "asp" {
   resource_group_name = azurerm_resource_group.rsg.name
   location = "Canada Central"
   sku_name = "B1"
-  os_type = Linux
+  os_type = "Linux"
   name = var.app_service_plan
 }
 
