@@ -181,13 +181,10 @@ jobs:
         run: az acr login --name netflixapp
        
       - name: Create DockerImage
-        run: |
-          docker build . \ 
-          -t netflixapp.azurecr.io/netflix:${{github.run_number}}
+        run: docker build . -t netflixapp.azurecr.io/netflix:${{github.run_number}}
 
       - name: push to acr
-        run: |
-          docker push netflixapp.azurecr.io/netflix:${{github.run_number}}
+        run: docker push netflixapp.azurecr.io/netflix:${{github.run_number}}
 
   DevInfra:
     runs-on: ubuntu-latest
