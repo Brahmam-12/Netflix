@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: netflix-eng
+  namespace: netflix
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: netflix-eng
+  template:
+    metadata:
+      labels:
+        app: netflix-eng
+    spec:
+      containers:
+        - name: netflixEng
+          image: "netflixapp.azurecr.io/netflix:{{ .Values.buildNumber }}"
+          ports:
+            - containerPort: 5000

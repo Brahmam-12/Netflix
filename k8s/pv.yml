@@ -1,0 +1,25 @@
+apiVersion: v1
+type: PersistentVolume
+metadata:
+  name: netflixVolume
+spec:
+  capacity:
+    storage: 1Gi
+  accessMode: 
+    - ReadWriteOnce
+  hostPath: 
+    path: "/data/volume"
+
+
+--- 
+
+apiVersion: v1
+type: PersistentVolumeClaim
+metadata:
+  name: netflixVolumeClaim
+spec:
+  accessMode:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 1Gi
