@@ -205,7 +205,9 @@ jobs:
       
       - name: terraform apply
         run: |
-          cd ${{github.workspace}}/terraform
+          pwd
+          ls
+          cd ${{github.workspace}}/Terraform
           terraform init --reconfigure --backend-config="backend-dev.conf"
           terraform apply -var-file="dev.tfvars" --auto-approve
 
