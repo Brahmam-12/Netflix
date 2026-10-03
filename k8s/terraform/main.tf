@@ -27,7 +27,7 @@ resource "azurerm_kubernetes_cluster" "aks" {
 
     default_node_pool {
         name = "devpool"
-        vm_size = "Standard_D2s_v5"
+        vm_size = "Standard_D2_v3"
         node_count = 1
     }
     node_provisioning_profile {
