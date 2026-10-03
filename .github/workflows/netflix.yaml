@@ -146,7 +146,7 @@ jobs:
       - name: Install Dotnet
         uses: actions/setup-dotnet@v4
         with:
-          dotnet-version: latest
+          dotnet-version: 10.x
       
       - name: checkout code
         uses: actions/checkout@v4
