@@ -162,7 +162,6 @@ jobs:
 
   DockerImage:
     runs-on: ubuntu-latest
-    needs: Build
     steps:
       # - name: Install DockerImage #commented because it comes default with runner
       #   uses: actions/docker@v2
