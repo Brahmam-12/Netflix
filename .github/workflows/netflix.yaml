@@ -179,7 +179,7 @@ jobs:
       
       - name: login acr
         run: az acr login --name netflixapp
-      
+       
       - name: Create DockerImage
         run: |
           docker build . \ 
