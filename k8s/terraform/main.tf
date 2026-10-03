@@ -19,6 +19,12 @@ resource "azurerm_resource_group" "rsg" {
   location = var.location
 }
 
+resource "azurerm_container_registry" "acr" {
+  name = "netflixapp"
+  location = var.location
+  resource_group_name = azurerm_resource_group.rsg.name
+  sku = "Premium"
+}
 
 resource "azurerm_kubernetes_cluster" "aks" {
     name = var.cluster_name
