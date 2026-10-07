@@ -5,6 +5,12 @@ terraform {
         source = "hashicorp/azurerm"
     }
   }
+  backend "azurerm" {
+    storage_account_name = "netflixterraformsa"
+    container_name = "tfstatefiles"
+    resource_group_name = "terraformstatersg"
+    key = "k8s.tfstate"
+  }
   required_version = ">=1.0"
 }
 
