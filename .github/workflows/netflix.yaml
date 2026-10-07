@@ -175,10 +175,10 @@ jobs:
           creds: ${{secrets.AZURE_CREDENTIALS}}
       
       - name: login acr
-        run: az acr login --name netflixapp
+        run: az acr login --name netflixazureacr
        
       - name: Create DockerImage
-        run: docker build . -t netflixapp.azurecr.io/netflix:${{github.run_number}}
+        run: docker build . -t netflixazureacr.azurecr.io/netflix:${{github.run_number}}
 
       - name: push to acr
-        run: docker push netflixapp.azurecr.io/netflix:${{github.run_number}}
+        run: docker push netflixazureacr.azurecr.io/netflix:${{github.run_number}}
