@@ -20,30 +20,30 @@ resource "azurerm_resource_group" "rsg" {
 }
 
 resource "azurerm_container_registry" "acr" {
-  name = "netflixapp"
+  name = var.acr_name
   location = var.location
   resource_group_name = azurerm_resource_group.rsg.name
   sku = "Premium"
 }
 
-resource "azurerm_kubernetes_cluster" "aks" {
-    name = var.cluster_name
-    resource_group_name = azurerm_resource_group.rsg.name
-    location = var.location
-    dns_prefix = var.dns_prefix
+# resource "azurerm_kubernetes_cluster" "aks" {
+#     name = var.cluster_name
+#     resource_group_name = azurerm_resource_group.rsg.name
+#     location = var.location
+#     dns_prefix = var.dns_prefix
 
-    default_node_pool {
-        name = "devpool"
-        vm_size = "Standard_D2_v3"
-        node_count = 1
-    }
-    node_provisioning_profile {
-        mode = "Manual"
-    }
-    identity {
-        type = "SystemAssigned"
-    }
-    tags = {
-      Environment = "Development"
-    }
-}
+#     default_node_pool {
+#         name = "devpool"
+#         vm_size = "Standard_D2_v3"
+#         node_count = 1
+#     }
+#     node_provisioning_profile {
+#         mode = "Manual"
+#     }
+#     identity {
+#         type = "SystemAssigned"
+#     }
+#     tags = {
+#       Environment = "Development"
+#     }
+# }

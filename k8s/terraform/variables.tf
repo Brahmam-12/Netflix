@@ -10,3 +10,6 @@ variable "cluster_name" {
 variable "dns_prefix" {
   type = string
 }
+variable "acr_name" {
+  type = string
+}
